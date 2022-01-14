@@ -1,22 +1,21 @@
 <template>
   <div class="home">
     <h1>THIS IS THE GITHUB TRACKER</h1>
-    <div v-for="repo in repos" v-bind:key="repo.id">
+    <div v-for="repo in orderBy(repos, 'forks_count', -1)" v-bind:key="repo.id">
       <p>{{ repo.name }}</p>
-      <p></p>
-      <p></p>
+      <p>{{ repo.stargazers_count }}</p>
+      <p>{{ repo.watchers_count }}</p>
+      <p>{{ repo.forks_count }}</p>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
 
 export default {
   mixins: [Vue2Filters.mixin],
-  name: "Home",
   data: function () {
     return {
       repos: [],
